@@ -13,7 +13,7 @@ Python 3.10以降とrunpodctlが必要です。Podの作成には、さらにLin
 
 `create --confirm`では、最初にLinux、root権限、systemdへの接続を確認します。条件を満たさなければ`unsupported_environment`のJSONエラーで終了し、Podやタイマーは作成しません。`preflight`と見積もり表示には、この制限を設けません。
 
-- runpodctlは既定で `/usr/local/bin/runpodctl` を呼びます。別の場所にある場合は、環境変数 `COEIROINK_RUNPODCTL` に実行ファイルの絶対パスを指定してください。
+- runpodctlは既定で `/usr/local/bin/runpodctl` を呼びます。別の場所にある場合は、環境変数 `RUNPOD_GUARD_RUNPODCTL` に実行ファイルの絶対パスを指定してください。
 - 削除サービスは `/usr/bin/python3` と `/usr/bin/systemctl` を使い、`/etc/systemd/system/` に設定ファイルを作成します。
 - 削除サービスはrootで動き、rootのrunpodctl認証設定を使います。そのため、Windows、macOS、systemdのないLinuxでは、この作成処理はそのままでは使えません。`preflight`だけならsystemdやroot権限は不要です。
 

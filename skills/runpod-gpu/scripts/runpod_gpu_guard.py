@@ -16,7 +16,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
-RUNPODCTL = os.environ.get("COEIROINK_RUNPODCTL", "/usr/local/bin/runpodctl")
+RUNPODCTL = os.environ.get("RUNPOD_GUARD_RUNPODCTL", "/usr/local/bin/runpodctl")
 SYSTEMCTL = "/usr/bin/systemctl"
 SYSTEMD_DIR = Path("/etc/systemd/system")
 PYTHON = "/usr/bin/python3"
@@ -380,7 +380,7 @@ def install_watchdog(pod_name: str, deadline: datetime) -> tuple[str, str]:
         "Type=oneshot\n"
         "User=root\n"
         "Environment=HOME=/root\n"
-        f"Environment=COEIROINK_RUNPODCTL={RUNPODCTL}\n"
+        f"Environment=RUNPOD_GUARD_RUNPODCTL={RUNPODCTL}\n"
         f"ExecStart={PYTHON} {script_path} watchdog-cleanup --name {pod_name}\n"
         "TimeoutStartSec=150s\n"
         "Restart=on-failure\n"
@@ -824,7 +824,7 @@ def parser() -> argparse.ArgumentParser:
         action="store_true",
         help="allow another Pod with a warning; no account-wide budget limit",
     )
-    create.add_argument("--name", default="coeiroink-gpu-check")
+    create.add_argument("--name", default="runpod-gpu-check")
     create.add_argument("--data-center-ids")
     create.add_argument("--ports", default="22/tcp")
     create.add_argument(
